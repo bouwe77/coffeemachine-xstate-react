@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import coffeeMachine from './coffeeMachine'
 import {
   CoffeeButton,
   CoffeeButtons,
@@ -10,7 +9,6 @@ import {
 } from './components'
 
 const App = () => {
-
   const [reservoirInMachine, setReservoirInMachine] = useState(true)
 
   const isOn = false
@@ -22,8 +20,7 @@ const App = () => {
       <CoffeeMachine reservoirInMachine={reservoirInMachine}>
         <PowerButton isOn={isOn} toggle={() => {}} />
 
-        <Display isOn={isOn}>
-        </Display>
+        <Display isOn={isOn}></Display>
 
         <CoffeeButtons>
           <CoffeeButton disabled={false}>Ristretto</CoffeeButton>
@@ -38,7 +35,6 @@ const App = () => {
           fill={() => {}}
         />
       </CoffeeMachine>
-
     </>
   )
 }
