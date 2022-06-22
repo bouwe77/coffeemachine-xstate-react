@@ -1,4 +1,3 @@
-import { useMachine } from '@xstate/react'
 import { useState } from 'react'
 import coffeeMachine from './coffeeMachine'
 import {
@@ -11,28 +10,25 @@ import {
 } from './components'
 
 const App = () => {
-  const [state, send] = useMachine(coffeeMachine)
 
   const [reservoirInMachine, setReservoirInMachine] = useState(true)
 
-  const isOn = ['starting', 'on', 'stopping'].some(state.matches)
+  const isOn = false
 
   return (
     <>
       <h1>My Coffee Machine</h1>
 
       <CoffeeMachine reservoirInMachine={reservoirInMachine}>
-        <PowerButton isOn={isOn} toggle={() => send('TOGGLE_POWER')} />
+        <PowerButton isOn={isOn} toggle={() => {}} />
 
         <Display isOn={isOn}>
-          {['starting', 'stopping'].some(state.matches) ? 'Please wait...' : null}
-          {state.matches('on') ? 'What can I get you?' : null}
         </Display>
 
         <CoffeeButtons>
-          <CoffeeButton disabled={!state.matches('on')}>Ristretto</CoffeeButton>
-          <CoffeeButton disabled={!state.matches('on')}>Espresso</CoffeeButton>
-          <CoffeeButton disabled={!state.matches('on')}>Lungo</CoffeeButton>
+          <CoffeeButton disabled={false}>Ristretto</CoffeeButton>
+          <CoffeeButton disabled={false}>Espresso</CoffeeButton>
+          <CoffeeButton disabled={false}>Lungo</CoffeeButton>
         </CoffeeButtons>
 
         <WaterReservoir
@@ -43,10 +39,6 @@ const App = () => {
         />
       </CoffeeMachine>
 
-      <div style={{ border: '3px dashed pink', padding: '3px', margin: '10px' }}>
-        <div>STATE: {JSON.stringify(state.value)}</div>
-        <div>CONTEXT: {JSON.stringify(state.context)}</div>
-      </div>
     </>
   )
 }
